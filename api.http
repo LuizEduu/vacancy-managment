@@ -1,0 +1,10 @@
+POST http://localhost:8080/candidate
+content-type: application/json
+
+{
+    "name": "Luiz Eduardo",
+    "username": "leduardo",
+    "email": "l.eduardo8316",
+    "password": "123456789",
+    "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
+}
