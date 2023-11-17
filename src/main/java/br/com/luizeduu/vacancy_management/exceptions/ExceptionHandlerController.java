@@ -11,8 +11,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice // indica que a classe vai ser 'global' e fazer os tratamentos dos
-                  // erros/exceptions da aplicação.
+import br.com.luizeduu.vacancy_management.exceptions.dto.ErrorMessageDTO;
+import br.com.luizeduu.vacancy_management.exceptions.dto.ErrorsMessageDTO;
+
+/*
+ * indica que a classe vai ser 'global' e fazer os tratamentos dos erros/exceptions da aplicação.
+ */
+@ControllerAdvice
 public class ExceptionHandlerController {
 
   private MessageSource messageSource;
