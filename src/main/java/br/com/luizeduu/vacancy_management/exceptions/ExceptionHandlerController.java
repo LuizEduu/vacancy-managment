@@ -22,16 +22,22 @@ public class ExceptionHandlerController {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class) // toda exception desse tipo vai cair nesse método
-  public ResponseEntity<List<ErrorMessageDTO>> handleMethodArgumentNotValidException(
+  public ResponseEntity<List<ErrorsMessageDTO>> handleMethodArgumentNotValidException(
       MethodArgumentNotValidException e) {
 
-    List<ErrorMessageDTO> errors = new ArrayList<>();
+    List<ErrorsMessageDTO> errors = new ArrayList<>();
 
     e.getBindingResult().getFieldErrors().forEach(err -> {
       String message = messageSource.getMessage(err, LocaleContextHolder.getLocale());
-      errors.add(new ErrorMessageDTO(message, err.getField()));
+      errors.add(new ErrorsMessageDTO(message, err.getField()));
     });
 
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(UserFoundException.class)
+  public ResponseEntity<ErrorMessageDTO> UserFoundException(UserFoundException e) {
+    return new ResponseEntity<>(new ErrorMessageDTO(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+  }
+
 }

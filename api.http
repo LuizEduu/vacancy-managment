@@ -4,7 +4,19 @@ content-type: application/json
 {
     "name": "Luiz Eduardo",
     "username": "leduardo",
-    "email": "l.eduardo8316",
-    "password": "123456789",
+    "email": "l.eduardo8316@gmail.com",
+    "password": "84724223as",
+    "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
+}
+###
+
+GET http://localhost:8080/candidate
+content-type: application/json
+
+{
+    "name": "Luiz Eduardo",
+    "username": "leduardo",
+    "email": "l.eduardo8316@gmail.com",
+    "password": "84724223as",
     "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
 }
