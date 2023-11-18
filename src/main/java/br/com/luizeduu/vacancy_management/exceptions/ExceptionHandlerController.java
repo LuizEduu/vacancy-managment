@@ -41,7 +41,12 @@ public class ExceptionHandlerController {
   }
 
   @ExceptionHandler(UserFoundException.class)
-  public ResponseEntity<ErrorMessageDTO> UserFoundException(UserFoundException e) {
+  public ResponseEntity<ErrorMessageDTO> userFoundException(UserFoundException e) {
+    return new ResponseEntity<>(new ErrorMessageDTO(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+  }
+
+  @ExceptionHandler(CompanyFoundException.class)
+  public ResponseEntity<ErrorMessageDTO> companyFoundException(CompanyFoundException e) {
     return new ResponseEntity<>(new ErrorMessageDTO(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
   }
 

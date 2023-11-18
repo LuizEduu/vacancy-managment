@@ -20,3 +20,27 @@ content-type: application/json
     "password": "84724223as",
     "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
 }
+###
+POST http://localhost:8080/company
+content-type: application/json
+
+{
+    "name": "Compass UOL",
+    "username": "compassuol",
+    "email": "contact@compass.com",
+    "password": "senhaextraforte",
+    "website": "www.compass.com",
+    "description": "Uma empresa muito maneira, para se trabalhar!"
+}
+###
+
+POST http://localhost:8080/job
+content-type: application/json
+
+{
+    "description": "Vaga para um dev foda",
+    "benefits": "não tem",
+    "companyId": "f8d81f5d-7655-45ce-8efb-b71adec03d9a",
+    "level": "tem que ter doutourado"
+}
+###

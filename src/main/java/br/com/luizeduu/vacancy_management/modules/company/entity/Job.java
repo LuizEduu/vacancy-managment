@@ -13,10 +13,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "job")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Job {
 
   @Id
@@ -43,5 +49,12 @@ public class Job {
   @UpdateTimestamp
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
+
+  public Job(String description, String benefits, String level, UUID companyId) {
+    this.description = description;
+    this.benefits = benefits;
+    this.level = level;
+    this.companyId = companyId;
+  }
 
 }
