@@ -38,9 +38,10 @@ POST http://localhost:8080/job
 content-type: application/json
 
 {
-    "description": "Vaga para um dev foda",
+    "description": "Vaga para um dev junior",
     "benefits": "não tem",
     "companyId": "f8d81f5d-7655-45ce-8efb-b71adec03d9a",
-    "level": "tem que ter doutourado"
+    "level": "tem que ter doutourado",
+    "compensation": 1200
 }
 ###

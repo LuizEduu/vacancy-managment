@@ -16,7 +16,7 @@ public class CreateJobUseCase {
   public Job execute(CreateJobDto createJobDto) {
 
     var job = new Job(createJobDto.getDescription(), createJobDto.getBenefits(), createJobDto.getLevel(),
-        createJobDto.getCompanyId());
+        createJobDto.getCompanyId(), createJobDto.getCompensation());
 
     return this.jobRepository.save(job);
   }

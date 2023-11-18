@@ -35,6 +35,8 @@ public class Job {
 
   private String level;
 
+  private Float compensation;
+
   @ManyToOne()
   @JoinColumn(name = "company_id", insertable = false, updatable = false)
   private Company company;
@@ -55,6 +57,14 @@ public class Job {
     this.benefits = benefits;
     this.level = level;
     this.companyId = companyId;
+  }
+
+  public Job(String description, String benefits, String level, UUID companyId, Float compensation) {
+    this.description = description;
+    this.benefits = benefits;
+    this.level = level;
+    this.companyId = companyId;
+    this.compensation = compensation;
   }
 
 }
