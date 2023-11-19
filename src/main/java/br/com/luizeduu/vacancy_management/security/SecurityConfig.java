@@ -1,30 +1,37 @@
 package br.com.luizeduu.vacancy_management.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /*
  * configuration indica para o Spring que ele deve ler essa classe e aplicar as configurações que forem definidar no momento que a aplicação startar
  */
 
+/*
+  * @Bean indica que o método abaixo vai definir algum objeto já gerenciado pelo
+  * spring, nesse caso vai sobrescrever as configurações do securityFilterChain
+  * do spring para a nossa configuração
+  */
+
 @Configuration
 public class SecurityConfig {
 
-  /*
-   * @Bean indica que o método abaixo vai definir algum objeto já gerenciado pelo
-   * spring, nesse caso vai sobrescrever as configurações do securityFilterChain
-   * do spring para a nossa configuração
-   */
+  @Autowired
+  private SecurityFilter securityFilter;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> {
-          auth.requestMatchers("/candidate").permitAll().requestMatchers("/company").permitAll();
+          auth.requestMatchers("/candidate").permitAll().requestMatchers("/company").permitAll()
+              .requestMatchers("/auth/company").permitAll();
           auth.anyRequest().authenticated();
-        });
+        })
+        .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
 
     return httpSecurity.build();
   }

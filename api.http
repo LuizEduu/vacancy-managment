@@ -14,8 +14,23 @@ GET http://localhost:8080/candidate
 
 ###
 
+# @name authCompany
+POST http://localhost:8080/auth/company
+content-type: application/json
+
+{
+    "username": "compassuol",
+    "password": "senhaextraforte"
+}
+###
+
+@company_token = {{authCompany.response.body.token}}
+
+
+###
 POST http://localhost:8080/company
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDQzMzgwNCwic3ViIjoiZmUzY2Q5NWMtMzFkNC00NTZmLThmMzMtNjkwMzQwMzg0NjNkIn0.jtPP-OpWH95e_ojSSGE6ek4fa5-0TchGFkDhX3ZckDc
 
 {
     "name": "Compass UOL",
