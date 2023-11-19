@@ -1,5 +1,8 @@
 package br.com.luizeduu.vacancy_management.provider;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,12 @@ public class JWTProvider {
         .getSubject();
 
     return subject;
+  }
 
+  public String hashPassword(String companyId) {
+    return JWT.create().withIssuer("vacancyManagement")
+        .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        .withSubject(companyId)
+        .sign(Algorithm.HMAC256(secretKey));
   }
 }
