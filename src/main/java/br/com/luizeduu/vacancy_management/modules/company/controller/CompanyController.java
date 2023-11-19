@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.luizeduu.vacancy_management.modules.company.dto.CreateCompanyDto;
+import br.com.luizeduu.vacancy_management.modules.company.dto.CreateCompanyDTO;
 import br.com.luizeduu.vacancy_management.modules.company.entity.Company;
 import br.com.luizeduu.vacancy_management.modules.company.useCase.CreateCompanyUseCase;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ public class CompanyController {
   private CreateCompanyUseCase createCompanyUseCase;
 
   @PostMapping
-  public ResponseEntity<Company> create(@Valid @RequestBody CreateCompanyDto createCompanyDto) {
+  public ResponseEntity<Company> create(@Valid @RequestBody CreateCompanyDTO createCompanyDto) {
     var company = this.createCompanyUseCase.execute(createCompanyDto);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(company);

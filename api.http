@@ -11,16 +11,9 @@ content-type: application/json
 ###
 
 GET http://localhost:8080/candidate
-content-type: application/json
 
-{
-    "name": "Luiz Eduardo",
-    "username": "leduardo",
-    "email": "l.eduardo8316@gmail.com",
-    "password": "84724223as",
-    "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
-}
 ###
+
 POST http://localhost:8080/company
 content-type: application/json
 

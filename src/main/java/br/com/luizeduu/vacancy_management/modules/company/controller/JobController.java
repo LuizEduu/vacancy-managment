@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.luizeduu.vacancy_management.modules.company.dto.CreateJobDto;
+import br.com.luizeduu.vacancy_management.modules.company.dto.CreateJobDTO;
 import br.com.luizeduu.vacancy_management.modules.company.entity.Job;
 import br.com.luizeduu.vacancy_management.modules.company.useCase.CreateJobUseCase;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ public class JobController {
   private CreateJobUseCase createJobUseCase;
 
   @PostMapping
-  public ResponseEntity<Job> create(@Valid @RequestBody CreateJobDto createJobDto) {
+  public ResponseEntity<Job> create(@Valid @RequestBody CreateJobDTO createJobDto) {
     var job = this.createJobUseCase.execute(createJobDto);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(job);

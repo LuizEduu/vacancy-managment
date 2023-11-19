@@ -50,4 +50,9 @@ public class ExceptionHandlerController {
     return new ResponseEntity<>(new ErrorMessageDTO(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
   }
 
+  @ExceptionHandler(AuthNotFoundException.class)
+  public ResponseEntity<ErrorMessageDTO> companyNotFoundException(AuthNotFoundException e) {
+    return new ResponseEntity<>(new ErrorMessageDTO(e.getMessage()), HttpStatus.FORBIDDEN);
+  }
+
 }

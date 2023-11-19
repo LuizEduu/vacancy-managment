@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class CreateJobDto {
+public class CreateJobDTO {
   private String description;
 
   @NotBlank(message = "Esse campo é obrigatorio")
