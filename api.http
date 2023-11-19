@@ -30,7 +30,8 @@ content-type: application/json
 ###
 POST http://localhost:8080/company
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDQzMzgwNCwic3ViIjoiZmUzY2Q5NWMtMzFkNC00NTZmLThmMzMtNjkwMzQwMzg0NjNkIn0.jtPP-OpWH95e_ojSSGE6ek4fa5-0TchGFkDhX3ZckDc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDQzNjAzNCwic3ViIjoiZmUzY2Q5NWMtMzFkNC00NTZmLThmMzMtNjkwMzQwMzg0NjNkIn0.9Y7HY1HohnuXHbgxl_duIDqbPqy4CZHUZ56z3_Xr2NA
+
 
 {
     "name": "Compass UOL",
