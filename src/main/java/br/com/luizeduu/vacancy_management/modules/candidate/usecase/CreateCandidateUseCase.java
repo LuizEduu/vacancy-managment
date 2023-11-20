@@ -8,7 +8,6 @@ import br.com.luizeduu.vacancy_management.exceptions.UserFoundException;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.CreateCandidateDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.entity.Candidate;
 import br.com.luizeduu.vacancy_management.modules.candidate.repository.CandidateRepository;
-import br.com.luizeduu.vacancy_management.provider.JWTProvider;
 
 @Service
 public class CreateCandidateUseCase {
