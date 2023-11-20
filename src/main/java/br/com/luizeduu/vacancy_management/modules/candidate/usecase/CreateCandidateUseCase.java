@@ -20,8 +20,12 @@ public class CreateCandidateUseCase {
           throw new UserFoundException();
         });
 
-    var candidate = new Candidate(candidateDTO.getName(), candidateDTO.getUsername(), candidateDTO.getEmail(),
-        candidateDTO.getPassword(), candidateDTO.getDescription());
+    var candidate = Candidate.builder()
+        .name(candidateDTO.getName())
+        .username(candidateDTO.getUsername())
+        .email(candidateDTO.getEmail())
+        .password(candidateDTO.getPassword())
+        .description(candidateDTO.getDescription()).build();
 
     this.candidateRepository.save(candidate);
 

@@ -27,8 +27,14 @@ public class CreateCompanyUseCase {
 
     var password = this.passwordEncoder.encode(companyDto.getPassword());
 
-    var company = new Company(companyDto.getUsername(), companyDto.getEmail(), password,
-        companyDto.getWebsite(), companyDto.getName(), companyDto.getDescription());
+    var company = Company.builder()
+        .username(companyDto.getUsername())
+        .email(companyDto.getEmail())
+        .password(password)
+        .website(companyDto.getWebsite())
+        .name(companyDto.getName())
+        .description(companyDto.getDescription()).build();
+
     return this.companyRepository.save(company);
   }
 }

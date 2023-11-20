@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +22,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity(name = "candidate")
 public class Candidate {
 
@@ -52,13 +56,5 @@ public class Candidate {
   @UpdateTimestamp
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
-
-  public Candidate(String name, String username, String email, String password, String description) {
-    this.name = name;
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.description = description;
-  }
 
 }
