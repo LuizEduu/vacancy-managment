@@ -9,4 +9,6 @@ import br.com.luizeduu.vacancy_management.modules.candidate.entity.Candidate;
 
 public interface CandidateRepository extends JpaRepository<Candidate, UUID> {
   Optional<Candidate> findByUsernameOrEmail(String username, String email);
+
+  Optional<Candidate> findByUsername(String username);
 }

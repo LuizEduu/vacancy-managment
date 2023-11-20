@@ -66,7 +66,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
   private String validateToken(String token) {
     try {
-      var subjectToken = this.jwtProvider.validateToken(token);
+      var subjectToken = this.jwtProvider.validateCompanyToken(token);
 
       return subjectToken;
     } catch (JWTVerificationException e) {

@@ -5,12 +5,21 @@ content-type: application/json
     "name": "Luiz Eduardo",
     "username": "leduardo",
     "email": "l.eduardo8316@gmail.com",
-    "password": "84724223as",
+    "password": "12345678910",
     "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
 }
 ###
 GET http://localhost:8080/candidate
 
+###
+
+POST http://localhost:8080/auth/candidate
+content-type: application/json
+
+{
+    "username": "leduardo",
+    "password": "12345678910"
+}
 ###
 
 # @name authCompany
