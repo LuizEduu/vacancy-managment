@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyDTO;
+import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.luizeduu.vacancy_management.modules.company.useCase.AuthCompanyUseCase;
 import jakarta.validation.Valid;
 
@@ -21,9 +22,10 @@ public class AuthCompanyController {
   private AuthCompanyUseCase authCompanyUseCase;
 
   @PostMapping("/company")
-  public ResponseEntity<String> auth(@Valid @RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
-    var token = this.authCompanyUseCase.execute(authCompanyDTO);
+  public ResponseEntity<AuthCompanyResponseDTO> auth(@Valid @RequestBody AuthCompanyDTO authCompanyDTO)
+      throws AuthenticationException {
+    var response = this.authCompanyUseCase.execute(authCompanyDTO);
 
-    return ResponseEntity.ok(token);
+    return ResponseEntity.ok(response);
   }
 }

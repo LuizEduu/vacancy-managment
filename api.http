@@ -22,16 +22,6 @@ content-type: application/json
 }
 ###
 
-# @name authCompany
-POST http://localhost:8080/auth/company
-content-type: application/json
-
-{
-    "username": "compassuol",
-    "password": "senhaextraforte"
-}
-###
-
 ###
 POST http://localhost:8080/company
 content-type: application/json
@@ -46,9 +36,19 @@ content-type: application/json
 }
 ###
 
+# @name authCompany
+POST http://localhost:8080/auth/company
+content-type: application/json
+
+{
+    "username": "compassuol",
+    "password": "senhaextraforte"
+}
+###
+
 POST http://localhost:8080/job
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDUxMzc4Mywic3ViIjoiNDNlZmFhMjAtMTdjMC00ZWQ5LWIwNWMtNDhhMjZiNzBhMTQ3In0.U0hiOqVG7IAb7R-FPbnVz2ZmG7INc4_I6UsDzyiTI6M
+Authorization: Bearer {{authCompany.request.body.access_token}}
 
 {
     "description": "Vaga para um dev junior",

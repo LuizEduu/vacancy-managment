@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.luizeduu.vacancy_management.exceptions.AuthNotFoundException;
 import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyDTO;
+import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.luizeduu.vacancy_management.modules.company.repository.CompanyRepository;
 import br.com.luizeduu.vacancy_management.provider.JWTProvider;
 
@@ -22,17 +23,21 @@ public class AuthCompanyUseCase {
   @Autowired
   private JWTProvider jwtProvider;
 
-  public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
-    var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername())
+  public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    var company = this.companyRepository.findByUsername(authCompanyDTO.username())
         .orElseThrow(() -> new AuthNotFoundException());
 
-    var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
+    var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.password(), company.getPassword());
 
     if (!passwordMatches) {
       throw new AuthNotFoundException();
     }
 
-    return jwtProvider.generateCompanyToken(company.getId().toString());
+    var token = jwtProvider.generateCompanyToken(company.getId().toString());
+
+    return AuthCompanyResponseDTO.builder()
+        .access_token(token)
+        .build();
 
   }
 }
