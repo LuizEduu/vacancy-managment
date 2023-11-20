@@ -11,6 +11,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
+import br.com.luizeduu.vacancy_management.provider.dto.CandidateTokenResponseDTO;
+
 @Service
 public class JWTProvider {
 
@@ -45,11 +47,15 @@ public class JWTProvider {
     return subject;
   }
 
-  public String generateCandidateToken(String subject) {
-    return JWT.create().withIssuer("vacancyManagement")
-        .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+  public CandidateTokenResponseDTO generateCandidateToken(String subject) {
+    var expiresIn = Instant.now().plus(Duration.ofHours(2));
+
+    var token = JWT.create().withIssuer("vacancyManagement")
+        .withExpiresAt(expiresIn)
         .withClaim("roles", Arrays.asList("candidate"))
         .withSubject(subject)
         .sign(Algorithm.HMAC256(companySecretKey));
+
+    return new CandidateTokenResponseDTO(token, expiresIn.toEpochMilli());
   }
 }

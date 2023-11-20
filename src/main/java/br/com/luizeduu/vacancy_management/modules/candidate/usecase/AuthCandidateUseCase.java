@@ -32,10 +32,10 @@ public class AuthCandidateUseCase {
       throw new AuthNotFoundException();
     }
 
-    var token = this.jwtProvider.generateCandidateToken(candidate.getId().toString());
+    var authData = this.jwtProvider.generateCandidateToken(candidate.getId().toString());
 
     return AuthCandidateResponseDTO.builder()
-        .acess_token(token).build();
-
+        .acess_token(authData.getToken())
+        .expires_in(authData.getExpiresIn()).build();
   }
 }
