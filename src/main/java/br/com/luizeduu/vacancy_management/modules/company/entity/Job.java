@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Job {
 
   @Id
@@ -57,14 +59,6 @@ public class Job {
     this.benefits = benefits;
     this.level = level;
     this.companyId = companyId;
-  }
-
-  public Job(String description, String benefits, String level, UUID companyId, Float compensation) {
-    this.description = description;
-    this.benefits = benefits;
-    this.level = level;
-    this.companyId = companyId;
-    this.compensation = compensation;
   }
 
 }

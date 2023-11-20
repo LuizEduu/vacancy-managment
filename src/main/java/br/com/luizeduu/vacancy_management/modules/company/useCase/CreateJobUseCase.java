@@ -1,5 +1,7 @@
 package br.com.luizeduu.vacancy_management.modules.company.useCase;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,15 @@ public class CreateJobUseCase {
   @Autowired
   private JobRepository jobRepository;
 
-  public Job execute(CreateJobDTO createJobDto) {
+  public Job execute(CreateJobDTO createJobDto, UUID companyId) {
 
-    var job = new Job(createJobDto.getDescription(), createJobDto.getBenefits(), createJobDto.getLevel(),
-        createJobDto.getCompanyId(), createJobDto.getCompensation());
+    var job = Job.builder()
+        .benefits(createJobDto.getBenefits())
+        .companyId(companyId)
+        .compensation(createJobDto.getCompensation())
+        .description(createJobDto.getDescription())
+        .level(createJobDto.getLevel())
+        .build();
 
     return this.jobRepository.save(job);
   }

@@ -33,10 +33,6 @@ public class SecurityFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
 
-    /*
-     * seta o contexto de permissões do usuário para o
-     * spring security ir validando durante o uso
-     */
     SecurityContextHolder.getContext().setAuthentication(null);
 
     var header = request.getHeader("Authorization");
@@ -50,6 +46,14 @@ public class SecurityFilter extends OncePerRequestFilter {
       }
 
       request.setAttribute("company_id", subject);
+
+      /*
+       * Spring security trabalha com contexto de auth e necessita saber quais as
+       * roles o usuário tem acesso. por meio do Username... eu seto quais roles esse
+       * user tem
+       * Por meio do securityContextHolder eu seto no contexto do usuário essas
+       * permissões
+       */
 
       var auth = new UsernamePasswordAuthenticationToken(subject,
           null, Collections.emptyList());
