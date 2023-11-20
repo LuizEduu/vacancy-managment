@@ -1,6 +1,7 @@
 package br.com.luizeduu.vacancy_management.modules.candidate.usecase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.luizeduu.vacancy_management.exceptions.UserFoundException;
@@ -16,7 +17,7 @@ public class CreateCandidateUseCase {
   private CandidateRepository candidateRepository;
 
   @Autowired
-  private JWTProvider jwtProvider;
+  private PasswordEncoder passwordEncoder;
 
   public Candidate execute(CreateCandidateDTO candidateDTO) {
     this.candidateRepository.findByUsernameOrEmail(candidateDTO.getUsername(), candidateDTO.getEmail())
@@ -28,7 +29,7 @@ public class CreateCandidateUseCase {
         .name(candidateDTO.getName())
         .username(candidateDTO.getUsername())
         .email(candidateDTO.getEmail())
-        .password(jwtProvider.hashPassword(candidateDTO.getPassword()))
+        .password(passwordEncoder.encode(candidateDTO.getPassword()))
         .description(candidateDTO.getDescription()).build();
 
     this.candidateRepository.save(candidate);

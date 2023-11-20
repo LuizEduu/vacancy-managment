@@ -32,7 +32,7 @@ public class AuthCompanyUseCase {
       throw new AuthNotFoundException();
     }
 
-    return jwtProvider.hashPassword(company.getId().toString());
+    return jwtProvider.generateToken(company.getId().toString());
 
   }
 }

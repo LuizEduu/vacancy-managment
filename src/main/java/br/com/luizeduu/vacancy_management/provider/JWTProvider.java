@@ -25,7 +25,7 @@ public class JWTProvider {
     return subject;
   }
 
-  public String hashPassword(String companyId) {
+  public String generateToken(String companyId) {
     return JWT.create().withIssuer("vacancyManagement")
         .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
         .withSubject(companyId)
