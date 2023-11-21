@@ -60,4 +60,9 @@ public class ExceptionHandlerController {
     return new ResponseEntity<ErrorMessageDTO>(new ErrorMessageDTO(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
   }
 
+  @ExceptionHandler(CandidateNotFoundException.class)
+  public ResponseEntity<ErrorMessageDTO> candidateNotFoundException(CandidateNotFoundException e) {
+    return new ResponseEntity<ErrorMessageDTO>(new ErrorMessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
+  }
+
 }
