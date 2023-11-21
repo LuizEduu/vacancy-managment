@@ -11,7 +11,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import br.com.luizeduu.vacancy_management.provider.JWTProvider;
+import br.com.luizeduu.vacancy_management.provider.JWTCompanyProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,10 +24,10 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
+public class SecurityCompanyFilter extends OncePerRequestFilter {
 
   @Autowired
-  private JWTProvider jwtProvider;
+  private JWTCompanyProvider jwtProvider;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -66,7 +66,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
   private String validateToken(String token) {
     try {
-      var subjectToken = this.jwtProvider.validateCompanyToken(token);
+      var subjectToken = this.jwtProvider.validateToken(token);
 
       return subjectToken;
     } catch (JWTVerificationException e) {

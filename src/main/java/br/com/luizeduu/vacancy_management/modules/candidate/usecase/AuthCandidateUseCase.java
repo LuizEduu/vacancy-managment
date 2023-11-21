@@ -8,7 +8,7 @@ import br.com.luizeduu.vacancy_management.exceptions.AuthNotFoundException;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.AuthCandidateDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.AuthCandidateResponseDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.repository.CandidateRepository;
-import br.com.luizeduu.vacancy_management.provider.JWTProvider;
+import br.com.luizeduu.vacancy_management.provider.JWTCandidateProvider;
 
 @Service
 public class AuthCandidateUseCase {
@@ -20,7 +20,7 @@ public class AuthCandidateUseCase {
   private PasswordEncoder passwordEncoder;
 
   @Autowired
-  private JWTProvider jwtProvider;
+  private JWTCandidateProvider jwtProvider;
 
   public AuthCandidateResponseDTO execute(AuthCandidateDTO authCandidateDTO) {
     var candidate = this.candidateRepository.findByUsername(authCandidateDTO.username())
@@ -32,7 +32,7 @@ public class AuthCandidateUseCase {
       throw new AuthNotFoundException();
     }
 
-    var authData = this.jwtProvider.generateCandidateToken(candidate.getId().toString());
+    var authData = this.jwtProvider.generateToken(candidate.getId().toString());
 
     return AuthCandidateResponseDTO.builder()
         .acess_token(authData.getToken())

@@ -21,7 +21,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig {
 
   @Autowired
-  private SecurityFilter securityFilter;
+  private SecurityCompanyFilter securityFilter;
+
+  @Autowired
+  private SecurityCandidateFilter securityCandidateFilter;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -33,7 +36,8 @@ public class SecurityConfig {
 
           auth.anyRequest().authenticated();
         })
-        .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
+        .addFilterBefore(securityFilter, BasicAuthenticationFilter.class)
+        .addFilterBefore(securityCandidateFilter, BasicAuthenticationFilter.class);
 
     return httpSecurity.build();
   }

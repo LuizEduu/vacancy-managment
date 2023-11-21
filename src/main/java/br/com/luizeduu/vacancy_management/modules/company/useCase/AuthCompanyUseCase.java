@@ -10,7 +10,7 @@ import br.com.luizeduu.vacancy_management.exceptions.AuthNotFoundException;
 import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyDTO;
 import br.com.luizeduu.vacancy_management.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.luizeduu.vacancy_management.modules.company.repository.CompanyRepository;
-import br.com.luizeduu.vacancy_management.provider.JWTProvider;
+import br.com.luizeduu.vacancy_management.provider.JWTCompanyProvider;
 
 @Service
 public class AuthCompanyUseCase {
@@ -21,7 +21,7 @@ public class AuthCompanyUseCase {
   private PasswordEncoder passwordEncoder;
 
   @Autowired
-  private JWTProvider jwtProvider;
+  private JWTCompanyProvider jwtProvider;
 
   public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     var company = this.companyRepository.findByUsername(authCompanyDTO.username())
@@ -33,7 +33,7 @@ public class AuthCompanyUseCase {
       throw new AuthNotFoundException();
     }
 
-    var token = jwtProvider.generateCompanyToken(company.getId().toString());
+    var token = jwtProvider.generateToken(company.getId().toString());
 
     return AuthCompanyResponseDTO.builder()
         .access_token(token)
