@@ -31,7 +31,7 @@ public class JWTCandidateProvider {
 
     var token = JWT.create().withIssuer("vacancyManagement")
         .withExpiresAt(expiresIn)
-        .withClaim("roles", Arrays.asList("candidate"))
+        .withClaim("roles", Arrays.asList("CANDIDATE"))
         .withSubject(subject)
         .withClaim("grant_type", "candidate")
         .sign(Algorithm.HMAC256(candidateSecretKey));

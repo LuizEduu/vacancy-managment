@@ -38,7 +38,7 @@ public class CandidateController {
   }
 
   @GetMapping
-  @PreAuthorize("hasRole('candidate')")
+  @PreAuthorize("hasRole('CANDIDATE')")
   public ResponseEntity<ProfileCandidateResponseDTO> find(HttpServletRequest request) {
     var candidateId = request.getAttribute("candidate_id");
     var candidate = this.profileCandidateUseCase.execute(UUID.fromString(candidateId.toString()));
