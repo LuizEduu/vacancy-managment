@@ -1,8 +1,10 @@
 package br.com.luizeduu.vacancy_management.security;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -30,15 +32,20 @@ public class SecurityCandidateFilter extends OncePerRequestFilter {
 
     String header = request.getHeader("Authorization");
 
-    if (header != null) {
+    if (request.getRequestURI().contains("candidate") && header != null) {
       var token = this.validateToken(header);
 
       if (token == null) {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return;
       }
 
       request.setAttribute("candidate_id", token.getSubject());
+
+      var auth = new UsernamePasswordAuthenticationToken(token.getSubject(), null, Collections.emptyList());
+
+      SecurityContextHolder.getContext().setAuthentication(auth);
+
     }
 
     filterChain.doFilter(request, response);

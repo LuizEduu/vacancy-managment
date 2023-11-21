@@ -29,6 +29,7 @@ public class JWTCompanyProvider {
     return JWT.create().withIssuer("vacancyManagement")
         .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
         .withSubject(subject)
+        .withClaim("grant_type", "company")
         .sign(Algorithm.HMAC256(companySecretKey));
   }
 }

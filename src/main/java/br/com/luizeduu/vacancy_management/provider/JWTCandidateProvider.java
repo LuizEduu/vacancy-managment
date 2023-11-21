@@ -33,6 +33,7 @@ public class JWTCandidateProvider {
         .withExpiresAt(expiresIn)
         .withClaim("roles", Arrays.asList("candidate"))
         .withSubject(subject)
+        .withClaim("grant_type", "candidate")
         .sign(Algorithm.HMAC256(candidateSecretKey));
 
     return new CandidateTokenResponseDTO(token, expiresIn.toEpochMilli());

@@ -9,9 +9,6 @@ content-type: application/json
     "description": "EU SOU UM CANDIDATO MUITO MANEIRO E LEGAL!!"
 }
 ###
-GET http://localhost:8080/candidate
-
-###
 
 POST http://localhost:8080/auth/candidate
 content-type: application/json
@@ -21,6 +18,12 @@ content-type: application/json
     "password": "12345678910"
 }
 ###
+
+GET http://localhost:8080/candidate
+Authorization: Bearer .eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDU4OTk1MSwicm9sZXMiOlsiY2FuZGlkYXRlIl0sInN1YiI6IjRjMjFkNDk3LTA5ZjMtNDk1NS1iMWRmLTA5MDgwMjM1ZDY5NSIsImdyYW50X3R5cGUiOiJjYW5kaWRhdGUifQ.l_GbPHLXQdr-mHORU776l4dE04wka3G81Yd-0_CyUJ0
+
+###
+
 
 ###
 POST http://localhost:8080/company
@@ -48,7 +51,7 @@ content-type: application/json
 
 POST http://localhost:8080/job
 content-type: application/json
-Authorization: Bearer {{authCompany.request.body.access_token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDU4ODQzMywic3ViIjoiNDNlZmFhMjAtMTdjMC00ZWQ5LWIwNWMtNDhhMjZiNzBhMTQ3In0.uMeov6l2gHlgEXpQ3_IEYRJ-j112l7LBeuAj2tDLfLg
 
 {
     "description": "Vaga para um dev junior",

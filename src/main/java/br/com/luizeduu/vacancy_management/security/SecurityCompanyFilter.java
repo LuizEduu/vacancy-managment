@@ -37,11 +37,12 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
 
     var header = request.getHeader("Authorization");
 
-    if (header != null) {
+    if (request.getRequestURI().contains("company") && header != null) {
+
       var subject = this.validateToken(header);
 
       if (subject.isEmpty()) {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return;
       }
 
@@ -59,6 +60,7 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
           null, Collections.emptyList());
 
       SecurityContextHolder.getContext().setAuthentication(auth);
+
     }
 
     filterChain.doFilter(request, response);
