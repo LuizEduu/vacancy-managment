@@ -51,7 +51,7 @@ content-type: application/json
 
 POST http://localhost:8080/job
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDU4ODQzMywic3ViIjoiNDNlZmFhMjAtMTdjMC00ZWQ5LWIwNWMtNDhhMjZiNzBhMTQ3In0.uMeov6l2gHlgEXpQ3_IEYRJ-j112l7LBeuAj2tDLfLg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDYxOTE5MCwic3ViIjoiZmMxNDAzZmQtYTQ0Yy00YmM3LWE5OGEtMDg4MmI0MDVjMDJjIiwicm9sZXMiOlsiQ09NUEFOWSJdLCJncmFudF90eXBlIjoiY29tcGFueSJ9.SE2XNltYs4KVocGQIw-fdisxJZC8kbLe7cWvVIHvN_A
 
 {
     "description": "Vaga para um dev junior",

@@ -1,15 +1,17 @@
 package br.com.luizeduu.vacancy_management.security;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import br.com.luizeduu.vacancy_management.provider.JWTCompanyProvider;
 import jakarta.servlet.FilterChain;
@@ -34,16 +36,13 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     var header = request.getHeader("Authorization");
 
-    if (request.getRequestURI().contains("company") && header != null) {
+    if ((request.getRequestURI().contains("company") || request.getRequestURI().contains("job")) && header != null) {
+      var token = this.validateToken(header);
 
-      var subject = this.validateToken(header);
-
-      if (subject.isEmpty()) {
+      if (token == null) {
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return;
       }
-
-      request.setAttribute("company_id", subject);
 
       /*
        * Spring security trabalha com contexto de auth e necessita saber quais as
@@ -53,8 +52,14 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
        * permissões
        */
 
-      var auth = new UsernamePasswordAuthenticationToken(subject,
-          null, Collections.emptyList());
+      request.setAttribute("company_id", token.getSubject());
+
+      var roles = token.getClaim("roles").asList(String.class);
+
+      var authGrants = roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase())).toList();
+
+      var auth = new UsernamePasswordAuthenticationToken(token.getSubject(),
+          null, authGrants);
 
       SecurityContextHolder.getContext().setAuthentication(auth);
 
@@ -63,13 +68,15 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 
-  private String validateToken(String token) {
+  private DecodedJWT validateToken(String header) {
     try {
-      var subjectToken = this.jwtProvider.validateToken(token);
+      var token = this.jwtProvider.validateToken(header);
 
-      return subjectToken;
+      return token;
+    } catch (TokenExpiredException e) {
+      return null;
     } catch (JWTVerificationException e) {
-      return "";
+      return null;
     }
   }
 

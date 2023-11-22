@@ -36,7 +36,8 @@ public class AuthCompanyUseCase {
     var token = jwtProvider.generateToken(company.getId().toString());
 
     return AuthCompanyResponseDTO.builder()
-        .access_token(token)
+        .access_token(token.getAccess_token())
+        .expiresIn(token.getExpiresIn())
         .build();
 
   }

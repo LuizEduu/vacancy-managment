@@ -17,7 +17,6 @@ public class CreateJobUseCase {
   private JobRepository jobRepository;
 
   public Job execute(CreateJobDTO createJobDto, UUID companyId) {
-
     jobRepository.findById(companyId).orElseThrow(() -> new CompanyNotFoundException());
 
     var job = Job.builder()

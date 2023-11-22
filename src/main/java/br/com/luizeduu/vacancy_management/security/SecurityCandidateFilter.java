@@ -38,13 +38,14 @@ public class SecurityCandidateFilter extends OncePerRequestFilter {
         return;
       }
 
-      request.setAttribute("candidate_id", token.getSubject());
-
       var roles = token.getClaim("roles").asList(String.class);
 
       /*
        * Spring security por padrão espera que seja ROLE_candidate por exemplo
        */
+
+      request.setAttribute("candidate_id", token.getSubject());
+
       var authGrants = roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase())).toList();
 
       var auth = new UsernamePasswordAuthenticationToken(token.getSubject(), null, authGrants);
