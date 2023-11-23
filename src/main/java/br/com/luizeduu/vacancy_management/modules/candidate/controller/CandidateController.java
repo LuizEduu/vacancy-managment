@@ -21,6 +21,14 @@ import br.com.luizeduu.vacancy_management.modules.candidate.usecase.CreateCandid
 import br.com.luizeduu.vacancy_management.modules.candidate.usecase.ListAllJobsByFilterUseCase;
 import br.com.luizeduu.vacancy_management.modules.candidate.usecase.ProfileCandidateUseCase;
 import br.com.luizeduu.vacancy_management.modules.company.entity.Job;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -55,6 +63,14 @@ public class CandidateController {
 
   @GetMapping("/job")
   @PreAuthorize("hasRole('CANDIDATE')")
+  @Tag(name = "Candidato", description = "Informações do candidato")
+  @Operation(summary = "Listagem de vagas disponível para o candidato", description = "Retorna uma lista de vagas de acordo com o filtro informado")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", content = {
+          @Content(array = @ArraySchema(schema = @Schema(implementation = Job.class)))
+      }),
+  })
+  @SecurityRequirement(name = "JWT_auth")
   public ResponseEntity<List<Job>> findJobsByFilter(@RequestParam String filter) {
     var jobs = this.listAllJobsByFilterUseCase.execute(filter);
 

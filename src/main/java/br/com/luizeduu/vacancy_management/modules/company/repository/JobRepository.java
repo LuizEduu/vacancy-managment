@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.luizeduu.vacancy_management.modules.company.entity.Job;
 
 public interface JobRepository extends JpaRepository<Job, UUID> {
-  List<Job> findByDescriptionContaining(String description);
+  List<Job> findByDescriptionContainingIgnoreCase(String description);
 }

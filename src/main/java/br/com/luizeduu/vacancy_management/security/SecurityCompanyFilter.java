@@ -36,11 +36,11 @@ public class SecurityCompanyFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     var header = request.getHeader("Authorization");
 
-    if ((request.getRequestURI().contains("company") || request.getRequestURI().contains("job")) && header != null) {
+    if ((request.getRequestURI().contains("company")) && header != null) {
       var token = this.validateToken(header);
 
       if (token == null) {
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return;
       }
 
