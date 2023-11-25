@@ -21,6 +21,7 @@ public class ApplyJobCandidateUseCase {
     this.candidateRepository.findById(candidateId).orElseThrow(() -> new CandidateNotFoundException());
 
     this.jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
+
   }
 
 }
