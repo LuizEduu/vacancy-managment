@@ -65,4 +65,9 @@ public class ExceptionHandlerController {
     return new ResponseEntity<ErrorMessageDTO>(new ErrorMessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(JobNotFoundException.class)
+  public ResponseEntity<ErrorMessageDTO> jobNotFoundException(JobNotFoundException e) {
+    return new ResponseEntity<ErrorMessageDTO>(new ErrorMessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
+  }
+
 }
