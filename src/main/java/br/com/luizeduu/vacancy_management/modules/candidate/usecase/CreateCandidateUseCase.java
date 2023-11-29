@@ -31,8 +31,6 @@ public class CreateCandidateUseCase {
         .password(passwordEncoder.encode(candidateDTO.getPassword()))
         .description(candidateDTO.getDescription()).build();
 
-    this.candidateRepository.save(candidate);
-
-    return candidate;
+    return this.candidateRepository.save(candidate);
   }
 }

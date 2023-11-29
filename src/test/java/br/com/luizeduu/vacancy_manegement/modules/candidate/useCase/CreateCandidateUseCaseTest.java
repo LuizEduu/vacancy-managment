@@ -1,8 +1,10 @@
 package br.com.luizeduu.vacancy_manegement.modules.candidate.useCase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,7 +20,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.luizeduu.vacancy_management.exceptions.UserFoundException;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.CreateCandidateDTO;
@@ -76,15 +77,7 @@ public class CreateCandidateUseCaseTest {
         .email("any_email")
         .build();
 
-    var candidate = Candidate.builder()
-        .name("any_name")
-        .username("any_username")
-        .description("any_description")
-        .email("any_email")
-        .password(passwordEncoder.encode("any_valid_password"))
-        .build();
-
-    when(candidateRepository.save(candidate)).thenReturn(createdCandidate);
+    when(candidateRepository.save(any(Candidate.class))).thenReturn(createdCandidate);
 
     var candidateDto = new CreateCandidateDTO();
     candidateDto.setUsername("username");
@@ -95,6 +88,9 @@ public class CreateCandidateUseCaseTest {
 
     var result = createCandidateUseCase.execute(candidateDto);
 
-    assertEquals(createdCandidate, result);
+    assertEquals(result, createdCandidate);
+    assertNotNull(result.getId().toString());
+    verify(passwordEncoder, times(1)).encode(eq(candidateDto.getPassword()));
+    verify(candidateRepository, times(1)).save(any(Candidate.class));
   }
 }
