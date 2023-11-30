@@ -19,7 +19,6 @@ public class CreateCompanyUseCase {
   private PasswordEncoder passwordEncoder;
 
   public Company execute(CreateCompanyDTO companyDto) {
-
     this.companyRepository.findByUsernameOrEmail(companyDto.getUsername(), companyDto.getEmail())
         .ifPresent((company) -> {
           throw new CompanyFoundException();

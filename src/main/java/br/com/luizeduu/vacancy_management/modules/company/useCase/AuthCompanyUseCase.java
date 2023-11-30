@@ -1,7 +1,5 @@
 package br.com.luizeduu.vacancy_management.modules.company.useCase;
 
-import javax.security.sasl.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ public class AuthCompanyUseCase {
   @Autowired
   private JWTCompanyProvider jwtProvider;
 
-  public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+  public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) {
     var company = this.companyRepository.findByUsername(authCompanyDTO.username())
         .orElseThrow(() -> new AuthNotFoundException());
 
