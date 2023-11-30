@@ -22,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.luizeduu.vacancy_management.exceptions.CandidateNotFoundException;
 import br.com.luizeduu.vacancy_management.exceptions.JobNotFoundException;
+import br.com.luizeduu.vacancy_management.modules.candidate.dto.ApplyJobDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.entity.ApplyJob;
 import br.com.luizeduu.vacancy_management.modules.candidate.entity.Candidate;
 import br.com.luizeduu.vacancy_management.modules.candidate.repository.ApplyJobRepository;
@@ -52,7 +53,7 @@ public class ApplyJobCandidateUseCaseTest {
     var id = UUID.randomUUID();
 
     assertThrows(CandidateNotFoundException.class, () -> {
-      applyJobCandidateUseCase.execute(null, id);
+      applyJobCandidateUseCase.execute(new ApplyJobDTO(null, id));
     });
     verify(candidateRepository, times(1)).findById(any());
     verify(candidateRepository, times(1)).findById(eq(null));
@@ -72,7 +73,7 @@ public class ApplyJobCandidateUseCaseTest {
     when(candidateRepository.findById(candidateId)).thenReturn(Optional.of(candidate));
 
     assertThrows(JobNotFoundException.class, () -> {
-      applyJobCandidateUseCase.execute(candidateId, null);
+      applyJobCandidateUseCase.execute(new ApplyJobDTO(candidateId, null));
     });
 
     verify(candidateRepository, times(1)).findById(candidateId);
@@ -114,7 +115,7 @@ public class ApplyJobCandidateUseCaseTest {
 
     when(applyJobRepository.save(applyJob)).thenReturn(createdApplyJob);
 
-    var returnerdApplyJob = applyJobCandidateUseCase.execute(candidateId, jobId);
+    var returnerdApplyJob = applyJobCandidateUseCase.execute(new ApplyJobDTO(candidateId, jobId));
 
     assertEquals(createdApplyJob, returnerdApplyJob);
     assertNotNull(returnerdApplyJob.getId());

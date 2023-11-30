@@ -64,3 +64,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5T
     "compensation": 1200
 }
 ###
+
+POST http://localhost:8080/candidate/appy/job
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMTM5NDY4Mywicm9sZXMiOlsiQ0FORElEQVRFIl0sInN1YiI6IjYwNTQ2YjQxLTVmMjEtNDM5Zi05MTI5LWNjZDBmMzQ5MDQ0ZCIsImdyYW50X3R5cGUiOiJjYW5kaWRhdGUifQ.iV1f7Q5Alt8Oi0ppgcQ6iXnVbBbApkv247vugkqDIRM
+
+{
+   "jobId": "e447ac9b-3439-482e-943a-3dad84261cd3" 
+}
+###

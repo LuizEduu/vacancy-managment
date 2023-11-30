@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.luizeduu.vacancy_management.exceptions.dto.ErrorMessageDTO;
+import br.com.luizeduu.vacancy_management.modules.candidate.dto.ApplyJobDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.CreateCandidateDTO;
 import br.com.luizeduu.vacancy_management.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.luizeduu.vacancy_management.modules.candidate.entity.ApplyJob;
 import br.com.luizeduu.vacancy_management.modules.candidate.entity.Candidate;
+import br.com.luizeduu.vacancy_management.modules.candidate.usecase.ApplyJobCandidateUseCase;
 import br.com.luizeduu.vacancy_management.modules.candidate.usecase.CreateCandidateUseCase;
 import br.com.luizeduu.vacancy_management.modules.candidate.usecase.ListAllJobsByFilterUseCase;
 import br.com.luizeduu.vacancy_management.modules.candidate.usecase.ProfileCandidateUseCase;
@@ -46,6 +49,9 @@ public class CandidateController {
 
   @Autowired
   private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
+
+  @Autowired
+  private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
   @PostMapping
   @Operation(summary = "Criação de candidato", description = "função responsável por criar um novo candidato")
@@ -95,6 +101,23 @@ public class CandidateController {
     var jobs = this.listAllJobsByFilterUseCase.execute(filter);
 
     return ResponseEntity.ok(jobs);
+  }
+
+  @PostMapping("/apply/job")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  @Operation(summary = "Aplicação de candidatura para vaga", description = "Aplicação de candidatura para vaga")
+  @ApiResponses({
+      @ApiResponse(responseCode = "201", content = {
+          @Content(schema = @Schema(implementation = ApplyJob.class))
+      }),
+  })
+  @SecurityRequirement(name = "JWT_auth")
+  public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID jobId) {
+    var candidateId = request.getAttribute("candidate_id");
+    var result = this.applyJobCandidateUseCase.execute(new ApplyJobDTO(UUID.fromString(candidateId.toString()), jobId));
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
   }
 
 }
