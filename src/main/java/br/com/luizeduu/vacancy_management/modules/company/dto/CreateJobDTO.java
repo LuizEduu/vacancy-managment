@@ -3,9 +3,15 @@ package br.com.luizeduu.vacancy_management.modules.company.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CreateJobDTO {
 
   @Schema(example = "Vaga para pessoa desenvolvedora", requiredMode = RequiredMode.REQUIRED)
