@@ -1,9 +1,11 @@
 package br.com.luizeduu.vacancy_manegement.modules.candidate.useCase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 import org.junit.jupiter.api.DisplayName;
@@ -36,6 +38,17 @@ public class ListAllJobsByFilterUseCaseTest {
     var result = listAllJobsByFilterUseCase.execute("any_description");
 
     assertEquals(result, jobList);
+  }
+
+  @Test
+  @DisplayName("Shoud be able to return a empty list with no jobs to apply")
+  public void shoud_be_able_to_return_a_empty_list_with_no_jobs_to_appy() {
+    var jobs = new ArrayList<Job>();
+    when(jobRepository.findByDescriptionContainingIgnoreCase("any_description")).thenReturn(jobs);
+
+    var result = listAllJobsByFilterUseCase.execute("any_description");
+    assertEquals(result, jobs);
+    assertEquals(Collections.EMPTY_LIST, result);
   }
 
 }
