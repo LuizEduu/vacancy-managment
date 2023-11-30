@@ -1,7 +1,6 @@
 package br.com.luizeduu.vacancy_manegement.modules.candidate.useCase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -50,5 +49,4 @@ public class ListAllJobsByFilterUseCaseTest {
     assertEquals(result, jobs);
     assertEquals(Collections.EMPTY_LIST, result);
   }
-
 }
