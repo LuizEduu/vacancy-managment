@@ -53,7 +53,7 @@ content-type: application/json
 }
 ###
 
-POST http://localhost:8080/job
+POST http://localhost:8080/company/job
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2YWNhbmN5TWFuYWdlbWVudCIsImV4cCI6MTcwMDYxOTE5MCwic3ViIjoiZmMxNDAzZmQtYTQ0Yy00YmM3LWE5OGEtMDg4MmI0MDVjMDJjIiwicm9sZXMiOlsiQ09NUEFOWSJdLCJncmFudF90eXBlIjoiY29tcGFueSJ9.SE2XNltYs4KVocGQIw-fdisxJZC8kbLe7cWvVIHvN_A
 
