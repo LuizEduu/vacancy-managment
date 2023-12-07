@@ -84,7 +84,7 @@ public class ApplyJobCandidateUseCaseTest {
   }
 
   @Test
-  @DisplayName("Should be able to to apply a job")
+  @DisplayName("Should be able to apply a job")
   public void should_be_able_to_apply_a_job() {
     var candidateId = UUID.randomUUID();
     var jobId = UUID.randomUUID();
@@ -123,4 +123,7 @@ public class ApplyJobCandidateUseCaseTest {
     verify(jobRepository, times(1)).findById(eq(jobId));
 
   }
+
+  @Test
+  @DisplayName("Should not be able to apply a job ")
 }

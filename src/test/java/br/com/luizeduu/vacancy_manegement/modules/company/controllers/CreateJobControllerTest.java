@@ -58,9 +58,9 @@ public class CreateJobControllerTest {
     var company = this.createCompanyUseCase.execute(createCompanyDto);
 
     var createJobDTO = CreateJobDTO.builder()
-      .benefits("nenhum")
+      .benefits("VA, VR, Plano de saúde")
       .compensation(500F)
-      .description("vaga de escravidão")
+      .description("any_description")
       .level("estagiario")
       .build();
 
