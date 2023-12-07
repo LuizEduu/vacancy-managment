@@ -124,6 +124,4 @@ public class ApplyJobCandidateUseCaseTest {
 
   }
 
-  @Test
-  @DisplayName("Should not be able to apply a job ")
 }

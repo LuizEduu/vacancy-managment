@@ -48,21 +48,21 @@ public class CreateJobControllerTest {
   @Test
   public void should_be_able_to_create_a_new_job() throws Exception {
     var createCompanyDto = CreateCompanyDTO.builder()
-      .description("any_description")
-      .email("any_validemail@test.com")
-      .name("any_name")
-      .password("any_valid_password")
-      .username("anyvalidusername")
-      .build();
+        .description("any_description")
+        .email("any_validemail@test.com")
+        .name("any_name")
+        .password("any_valid_password")
+        .username("anyvalidusername")
+        .build();
 
     var company = this.createCompanyUseCase.execute(createCompanyDto);
 
     var createJobDTO = CreateJobDTO.builder()
-      .benefits("VA, VR, Plano de saúde")
-      .compensation(500F)
-      .description("any_description")
-      .level("estagiario")
-      .build();
+        .benefits("VA, VR, Plano de saúde")
+        .compensation(500F)
+        .description("any_description")
+        .level("estagiario")
+        .build();
 
     var result = mockMvc.perform(post("/company/job")
         .contentType(MediaType.APPLICATION_JSON)
