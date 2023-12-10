@@ -5,7 +5,7 @@ services:
     container_name: "vacancy_managment_postgres"
     image: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
@@ -17,19 +17,25 @@ services:
     container_name: prometheus
     image: prom/prometheus:latest
     volumes:
-      - prometheus_data:/prometheus
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
     networks:
-      - vacancy-managment-network
+      - gv-network
     ports:
       - "9090:9090"
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - gv-network
 
 networks:
-  vacancy-managment-network:
+  gv-network:
     driver: bridge
-
 volumes:
   pgdata:
-    driver: local
   prometheus_data:
-    driver: local
+  grafana_data:
+
