@@ -13,6 +13,23 @@ services:
     volumes:
       - pgdata:/data/postgres
 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - prometheus_data:/prometheus
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - vacancy-managment-network
+    ports:
+      - "9090:9090"
+
+networks:
+  vacancy-managment-network:
+    driver: bridge
+
 volumes:
   pgdata:
+    driver: local
+  prometheus_data:
     driver: local
